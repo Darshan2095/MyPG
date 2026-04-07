@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
   const token = await getToken({ req });
 
-  if (!token || token.role !== "PG_OWNER") {
+  if (!token) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 

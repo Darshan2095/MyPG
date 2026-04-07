@@ -62,7 +62,6 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           <NavLink href="/">Home</NavLink>
           <NavLink href="/pg">Find PG</NavLink>
-          <NavLink href="/">Cities</NavLink>
 
           {/* SERVICES CLICK DROPDOWN */}
           <div className="relative" ref={dropdownRef}>
@@ -77,8 +76,8 @@ export default function Navbar() {
 
             {dropdownOpen && (
               <div className="absolute top-[calc(100%+8px)] right-0 w-64 bg-slate-900 border border-white/10 rounded-2xl shadow-2xl p-2 animate-in fade-in zoom-in duration-200">
-                <DropdownItem href="/pg" icon={Search} label="PG Booking" desc="Browse verified listings" />
                 <DropdownItem href="/owner/add-pg" icon={PlusCircle} label="Register PG" desc="List your property today" />
+                <DropdownItem href="/worker/dashboard" icon={PlusCircle} label="Register Work" desc="List your property today" />
                 <DropdownItem href="/contact" icon={PhoneCall} label="Support" desc="Get help 24/7" />
               </div>
             )}
@@ -103,11 +102,9 @@ export default function Navbar() {
                   
                   {/* Mini Hover Menu */}
                   <div className="absolute top-full right-0 mt-2 w-48 bg-slate-900 border border-white/10 rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-1 shadow-2xl">
-                    {session.user.role === "PG_OWNER" && (
-                      <Link href="/owner" className="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded-lg text-sm">
-                        <LayoutDashboard size={16} /> Dashboard
-                      </Link>
-                    )}
+                    <Link href="/owner" className="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded-lg text-sm">
+                      <LayoutDashboard size={16} /> Dashboard
+                    </Link>
                     <button 
                       onClick={() => signOut({ callbackUrl: "/login" })}
                       className="w-full flex items-center gap-2 px-3 py-2 hover:bg-red-500/20 text-red-400 rounded-lg text-sm"
@@ -148,8 +145,8 @@ export default function Navbar() {
           <div className="flex flex-col gap-4">
             <MobileLink href="/" onClick={() => setMobileOpen(false)}>Home</MobileLink>
             <MobileLink href="/pg" onClick={() => setMobileOpen(false)}>Find PG</MobileLink>
-            <MobileLink href="/" onClick={() => setMobileOpen(false)}>Cities</MobileLink>
             <MobileLink href="/owner/add-pg" onClick={() => setMobileOpen(false)}>List Property</MobileLink>
+            <MobileLink href="/worker/dashboard" onClick={() => setMobileOpen(false)}>Register Work</MobileLink>
           </div>
 
           <div className="pt-6 border-t border-white/10">
@@ -164,11 +161,9 @@ export default function Navbar() {
                      <p className="text-xs text-slate-400">Personal Account</p>
                    </div>
                 </div>
-                {session.user.role === "PG_OWNER" && (
-                  <Link href="/owner" className="block w-full text-center py-3 border border-white/20 rounded-xl font-bold">
-                    Owner Dashboard
-                  </Link>
-                )}
+                <Link href="/owner" className="block w-full text-center py-3 border border-white/20 rounded-xl font-bold">
+                  Owner Dashboard
+                </Link>
                 <button
                   onClick={() => signOut({ callbackUrl: "/login" })}
                   className="w-full bg-red-600/10 text-red-500 py-3 rounded-xl font-bold border border-red-500/20"

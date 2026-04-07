@@ -14,6 +14,30 @@ export default function PgDetailsPage() {
   const [pg, setPg] = useState(null);
   const [activeImg, setActiveImg] = useState(0);
 
+  const handleApplyToPg = async () => {
+    const applicantName = window.prompt("Enter your name");
+    if (!applicantName) return;
+
+    const applicantPhone = window.prompt("Enter your phone number");
+    if (!applicantPhone) return;
+
+    const message = window.prompt("Message (optional)") || "";
+
+    const res = await fetch(`/api/pg/${id}/apply`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ applicantName, applicantPhone, message }),
+    });
+
+    if (res.ok) {
+      alert("Application sent successfully");
+      return;
+    }
+
+    const data = await res.json().catch(() => ({}));
+    alert(data.message || "Failed to submit application");
+  };
+
   useEffect(() => {
     fetch(`/api/pg/${id}`)
       .then((res) => res.json())
@@ -188,10 +212,16 @@ export default function PgDetailsPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <button className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-5 rounded-2xl transition-all shadow-xl shadow-blue-600/20 active:scale-95 flex items-center justify-center gap-3">
+                  <button
+                    onClick={handleApplyToPg}
+                    className="w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-5 rounded-2xl transition-all shadow-xl shadow-blue-600/20 active:scale-95 flex items-center justify-center gap-3"
+                  >
                     <Phone size={20} fill="currentColor" /> CALL OWNER NOW
                   </button>
-                  <button className="w-full bg-white/5 hover:bg-white/10 backdrop-blur-sm text-white font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 border border-white/10">
+                  <button
+                    onClick={handleApplyToPg}
+                    className="w-full bg-white/5 hover:bg-white/10 backdrop-blur-sm text-white font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 border border-white/10"
+                  >
                     <Mail size={20} /> SEND INQUIRY
                   </button>
                 </div>
@@ -226,7 +256,7 @@ export default function PgDetailsPage() {
               <p className="text-[10px] font-black text-blue-400 uppercase tracking-tighter">Starts From</p>
               <p className="text-2xl font-black text-white italic">₹{pg.pricing?.monthlyRent}</p>
             </div>
-            <button className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black text-sm shadow-lg shadow-blue-600/40">
+            <button onClick={handleApplyToPg} className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-black text-sm shadow-lg shadow-blue-600/40">
               CONTACT
             </button>
          </div>
