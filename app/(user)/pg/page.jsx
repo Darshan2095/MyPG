@@ -87,7 +87,7 @@ export default function LatestPgs() {
       </div>
 
       {/* --- PREMIUM FILTER BAR --- */}
-      <div className="sticky top-24 z-40 bg-white/80 backdrop-blur-xl border border-gray-100 rounded-[2.5rem] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.05)] mb-16">
+      <div className="md:sticky top-24 z-40 bg-white/80 backdrop-blur-xl border border-gray-100 rounded-[2.5rem] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.05)] mb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2">
           
           <FilterWrapper icon={<MapPin size={18}/>}>
