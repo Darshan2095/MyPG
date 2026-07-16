@@ -20,7 +20,6 @@ export default function OwnerSidebar() {
 
   const menuItems = [
     { label: "Dashboard", href: "/owner", icon: LayoutDashboard },
-    { label: "My Properties", href: "/owner/my-pgs", icon: Building2 },
     { label: "List New PG", href: "/owner/add-pg", icon: PlusCircle },
     { label: "Find Services", href: "/owner/find-worker", icon: Users },
   ];
